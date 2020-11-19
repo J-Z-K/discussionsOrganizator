@@ -12,20 +12,21 @@ const useStyles = makeStyles({
     },
 });
 
-function TaskInput({ className, students }) {
+function TaskInput({ className, students, currentClass }) {
     const [task, setTask] = React.useState(0);
     const [section, setSection] = React.useState(0);
     const [student, setStudent] = React.useState({});
     const handleSubmit = (event) => {
         //Make a network call somewhere
         event.preventDefault();
-        console.log(student);
-        // const db = firebase.firestore();
-        // db.collection("students").add({
-        //     name: name,
-        //     surname: surname,
-        //     pluses: parseInt(pluses),
-        // });
+        const db = firebase.firestore();
+        db.collection(`list-${currentClass.toLocaleDateString("pl-PL")}`).add({
+            student: db.doc(`students/${student.id}`),
+            currentClass: currentClass,
+            task: parseInt(task),
+            section: parseInt(section),
+            created: firebase.firestore.FieldValue.serverTimestamp(),
+        });
     };
 
     const classes = useStyles();

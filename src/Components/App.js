@@ -7,6 +7,7 @@ import MenuBar from "./MenuBar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Tasks from "./Tasks";
 import firebase from "../firebase";
+import { currentClass } from "../time";
 
 function App() {
     const useStyles = makeStyles({
@@ -17,6 +18,7 @@ function App() {
         },
     });
     const [students, setStudents] = React.useState([]);
+    const [list, setList] = React.useState([]);
 
     React.useEffect(() => {
         const db = firebase.firestore();
@@ -27,6 +29,20 @@ function App() {
             );
             setStudents(studentsData);
         });
+        return unsubscribe;
+    }, []);
+
+    React.useEffect(() => {
+        const db = firebase.firestore();
+        const unsubscribe = db
+            .collection(`list-${currentClass.toLocaleDateString("pl-PL")}`)
+            .onSnapshot((snapshot) => {
+                const ListData = [];
+                snapshot.forEach((doc) => {
+                    ListData.push({ ...doc.data(), id: doc.id });
+                });
+                setList(ListData);
+            });
         return unsubscribe;
     }, []);
 
@@ -50,8 +66,9 @@ function App() {
                                         path="/"
                                         render={() => (
                                             <Tasks
-                                                list={{}}
+                                                list={list}
                                                 students={students}
+                                                currentClass={currentClass}
                                             />
                                         )}
                                     />

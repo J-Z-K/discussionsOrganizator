@@ -19,14 +19,27 @@ const useStyles = makeStyles({
     },
 });
 
-function Tasks({ list, students }) {
+function Tasks({ list, students, currentClass }) {
     const classes = useStyles();
+
+    // console.log(dates);
 
     return (
         <div className={classes.root}>
+            <div>
+                Przyszłe zajęcia: {currentClass.toLocaleDateString("pl-PL")}
+            </div>
             <Typography variant="h4">Lista Zadań:</Typography>
-            <TaskInput className={classes.studentInput} students={students} />
-            <TaskList data={list} className={classes.table} />
+            <TaskInput
+                className={classes.studentInput}
+                students={students}
+                currentClass={currentClass}
+            />
+            <TaskList
+                tasks={list}
+                students={students}
+                className={classes.table}
+            />
         </div>
     );
 }

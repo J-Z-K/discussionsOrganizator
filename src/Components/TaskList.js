@@ -7,28 +7,32 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import StudentTableRow from "./StudentTableRow";
+import TaskTableRow from "./TaskTableRow";
 
 const useStyles = makeStyles({});
 
-export default function StyledTable({ className }) {
+export default function TaskList({ className, tasks, students }) {
     const classes = useStyles();
-    const data = [{}];
     return (
         <TableContainer component={Paper} elevation={3} className={className}>
             <Table aria-label="simple table" size="small">
                 <TableHead>
                     <TableRow>
                         <TableCell>Imię i Nazwisko</TableCell>
-                        <TableCell align="right">Numer zadania</TableCell>
+                        <TableCell align="right">Zadanie</TableCell>
+                        <TableCell align="right">Dział</TableCell>
                         <TableCell align="right">data dodania</TableCell>
                         <TableCell align="right">Liczba plusów</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {/* {data.map((student) => (
-                        <StudentTableRow student={student} key={student.id} />
-                    ))} */}
+                    {tasks.map((task) => (
+                        <TaskTableRow
+                            student={students}
+                            task={task}
+                            key={task.id}
+                        />
+                    ))}
                 </TableBody>
             </Table>
         </TableContainer>
