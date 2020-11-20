@@ -1,7 +1,5 @@
 import React from "react";
-import StudentInput from "./StudentInput";
-import TaskList from "./TaskList";
-import StyledTable from "./StyledTable";
+import TaskList from "./TaskTable";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import TaskInput from "./TaskInput";
@@ -17,6 +15,9 @@ const useStyles = makeStyles({
     input: {
         marginBottom: 60,
     },
+    important: {
+        fontWeight: "bolder",
+    },
 });
 
 function Tasks({ list, students, currentClass }) {
@@ -26,17 +27,24 @@ function Tasks({ list, students, currentClass }) {
 
     return (
         <div className={classes.root}>
-            <div>
-                Przyszłe zajęcia: {currentClass.toLocaleDateString("pl-PL")}
-            </div>
-            <Typography variant="h4">Lista Zadań:</Typography>
+            <Typography variant="h4">
+                {" "}
+                Lista na dzień:{" "}
+                <span className={classes.important}>
+                    {currentClass.toLocaleDateString("pl-PL")}
+                </span>
+            </Typography>
             <TaskInput
-                className={classes.studentInput}
+                className={classes.input}
                 students={students}
                 currentClass={currentClass}
             />
+
             <TaskList
-                tasks={list}
+                tasks={list.map((task) => ({
+                    ...task,
+                    s: students.find((student) => student.id == task.studentID),
+                }))}
                 students={students}
                 className={classes.table}
             />

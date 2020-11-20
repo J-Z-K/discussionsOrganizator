@@ -1,6 +1,6 @@
 import { Button, TextField } from "@material-ui/core";
 import React from "react";
-import firebase from "../firebase";
+import firebase from "../../firebase";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({

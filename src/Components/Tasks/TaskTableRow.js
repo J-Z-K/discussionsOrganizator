@@ -5,11 +5,11 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import DeleteIcon from "@material-ui/icons/Delete";
-import firebase from "../firebase";
-import { now } from "../time";
+import firebase from "../../firebase";
+import { now } from "../../time";
 
-function TaskTableRow({ task }) {
-    const [student, setStudent] = React.useState({});
+function TaskTableRow({ task, student }) {
+    // const [student, setStudent] = React.useState({});
     const created = task.created
         ? {
               date: task.created.toDate().toLocaleDateString("pl-PL", {
@@ -32,23 +32,23 @@ function TaskTableRow({ task }) {
               }),
           };
 
-    React.useEffect(() => {
-        const db = firebase.firestore();
-        const unsubscribe = task.student.onSnapshot((doc) => {
-            setStudent(doc.data());
-        });
-        return unsubscribe;
-    }, []);
-
+    // React.useEffect(() => {
+    //     const db = firebase.firestore();
+    //     const unsubscribe = task.student.onSnapshot((doc) => {
+    //         setStudent(doc.data());
+    //     });
+    //     return unsubscribe;
+    // }, []);
+    // console.log(student);
     return (
         <TableRow>
-            <TableCell>{`${student.name} ${student.surname}`}</TableCell>
+            <TableCell>{`${task.s.name} ${task.s.surname}`}</TableCell>
             <TableCell align="right">{task.task}</TableCell>
             <TableCell align="right">{task.section}</TableCell>
             <TableCell align="right">
                 {`${created.time} ${created.date}`}
             </TableCell>
-            <TableCell align="right">{student.pluses}</TableCell>
+            <TableCell align="right">{task.s.pluses}</TableCell>
         </TableRow>
     );
 }

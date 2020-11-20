@@ -1,7 +1,6 @@
 import React from "react";
 import StudentInput from "./StudentInput";
 import StudentsTable from "./StudentsTable";
-import StyledTable from "./StyledTable";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 

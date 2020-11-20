@@ -1,11 +1,10 @@
 import React from "react";
-import StyledTable from "./StyledTable";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import Students from "./Students";
+import Students from "./Students/Students";
 import MenuBar from "./MenuBar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Tasks from "./Tasks";
+import Tasks from "./Tasks/Tasks";
 import firebase from "../firebase";
 import { currentClass } from "../time";
 

@@ -4,8 +4,7 @@ import TableCell from "@material-ui/core/TableCell";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
-import DeleteIcon from "@material-ui/icons/Delete";
-import firebase from "../firebase";
+import firebase from "../../firebase";
 
 function StudentTableRow({ student }) {
     const onChange = (val) => {

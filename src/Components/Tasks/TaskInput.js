@@ -1,6 +1,6 @@
 import { Button, TextField } from "@material-ui/core";
 import React from "react";
-import firebase from "../firebase";
+import firebase from "../../firebase";
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
@@ -21,7 +21,7 @@ function TaskInput({ className, students, currentClass }) {
         event.preventDefault();
         const db = firebase.firestore();
         db.collection(`list-${currentClass.toLocaleDateString("pl-PL")}`).add({
-            student: db.doc(`students/${student.id}`),
+            studentID: `${student.id}`,
             currentClass: currentClass,
             task: parseInt(task),
             section: parseInt(section),

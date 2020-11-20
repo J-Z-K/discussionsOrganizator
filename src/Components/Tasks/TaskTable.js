@@ -13,6 +13,18 @@ const useStyles = makeStyles({});
 
 export default function TaskList({ className, tasks, students }) {
     const classes = useStyles();
+
+    // const sortFunc =
+
+    tasks.sort((a, b) => {
+        if (a.s.pluses < b.s.pluses) return -1;
+        if (a.s.pluses > b.s.pluses) return 1;
+        if (a.created && b.created) {
+            if (a.created.toDate() < b.created.toDate()) return -1;
+            if (a.created.toDate() > b.created.toDate()) return 0;
+        }
+    });
+
     return (
         <TableContainer component={Paper} elevation={3} className={className}>
             <Table aria-label="simple table" size="small">
@@ -26,13 +38,14 @@ export default function TaskList({ className, tasks, students }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tasks.map((task) => (
-                        <TaskTableRow
-                            student={students}
-                            task={task}
-                            key={task.id}
-                        />
-                    ))}
+                    {tasks.map((task) => {
+                        console.log(
+                            students.find(
+                                (student) => student.id == task.studentID,
+                            ),
+                        );
+                        return <TaskTableRow task={task} key={task.id} />;
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>
